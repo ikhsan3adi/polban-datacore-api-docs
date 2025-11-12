@@ -1,0 +1,1189 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Polban DataVerse - DataCore API",
+    "version": "1.0",
+    "contact": {
+      "name": "Ikhsan Satriadi",
+      "email": "ikhsan.satriadi.tif24@polban.ac.id",
+      "url": "https://github.com/ikhsan3adi/"
+    }
+  },
+  "externalDocs": {
+    "description": "GitHub Repository",
+    "url": "https://github.com/muhamadSyahid/polban-datacore/"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Development"
+    },
+    {
+      "url": "https://datacore.polbandataverse.ac.id",
+      "description": "Production (Example)"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Guest",
+      "description": "Endpoint publik tanpa autentikasi."
+    },
+    {
+      "name": "Akademik",
+      "description": "Endpoint terkait data akademik (memerlukan autentikasi)."
+    },
+    {
+      "name": "Kemahasiswaan",
+      "description": "Endpoint terkait data kemahasiswaan (memerlukan autentikasi)."
+    }
+  ],
+  "paths": {
+    "/api/v1/guest/mahasiswa/gender": {
+      "get": {
+        "tags": ["Guest"],
+        "summary": "Get Mahasiswa Gender (Guest)",
+        "description": "Mengambil data agregat jumlah mahasiswa berdasarkan jenis kelamin untuk semua angkatan.",
+        "operationId": "getGuestMahasiswaGender",
+        "responses": {
+          "200": {
+            "description": "Data jenis kelamin mahasiswa (Guest)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JenisTotalArray"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/guest/mahasiswa/jenis-slta": {
+      "get": {
+        "tags": ["Guest"],
+        "summary": "Get Mahasiswa Jenis SLTA (Guest)",
+        "description": "Mengambil data agregat jumlah mahasiswa berdasarkan jenis SLTA untuk semua angkatan.",
+        "operationId": "getGuestMahasiswaJenisSlta",
+        "responses": {
+          "200": {
+            "description": "Data jenis SLTA mahasiswa (Guest)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JenisTotalArray"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/guest/mahasiswa/rasio-dosen-mhs": {
+      "get": {
+        "tags": ["Guest"],
+        "summary": "Get Rasio Dosen dan Mahasiswa (Guest)",
+        "description": "Mengambil data rasio total dosen terhadap total mahasiswa.",
+        "operationId": "getGuestMahasiswaRasioDosenMhs",
+        "responses": {
+          "200": {
+            "description": "Data rasio dosen dan mahasiswa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuestRasioDosenMhs"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/guest/mahasiswa/domisili": {
+      "get": {
+        "tags": ["Guest"],
+        "summary": "Get Persebaran Domisili Mahasiswa (Guest)",
+        "description": "Mengambil data persebaran domisili mahasiswa. Jika parameter 'provinsi' diberikan, akan mengembalikan persebaran kota di provinsi tersebut. Jika tidak, akan mengembalikan persebaran provinsi.",
+        "operationId": "getGuestMahasiswaDomisili",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ProvinsiQuery"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Data persebaran domisili (provinsi atau kota)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/GuestDomisiliAll"
+                    },
+                    {
+                      "$ref": "#/components/schemas/GuestDomisiliProvinsi"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/guest/mahasiswa/agama": {
+      "get": {
+        "tags": ["Guest"],
+        "summary": "Get Mahasiswa Agama (Guest)",
+        "description": "Mengambil data agregat jumlah mahasiswa berdasarkan agama untuk semua angkatan.",
+        "operationId": "getGuestMahasiswaAgama",
+        "responses": {
+          "200": {
+            "description": "Data agama mahasiswa (Guest)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgamaTotalArray"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/akademik/distribusi-nilai": {
+      "get": {
+        "tags": ["Akademik"],
+        "summary": "Get Distribusi Nilai",
+        "description": "Mengambil data distribusi indeks nilai per mata kuliah. (Memerlukan autentikasi).",
+        "operationId": "getAkademikDistribusiNilai",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Data distribusi nilai",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AkademikDistribusiNilai"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        }
+      }
+    },
+    "/api/v1/akademik/tren-ip-rata-rata": {
+      "get": {
+        "tags": ["Akademik"],
+        "summary": "Get Tren IP Rata-Rata",
+        "description": "Mengambil data tren IP rata-rata per semester untuk angkatan tertentu. (Memerlukan autentikasi).",
+        "operationId": "getAkademikTrenIpRataRata",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Data tren IP rata-rata",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AkademikTrenIpRataRata"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        }
+      }
+    },
+    "/api/v1/akademik/tren-ip-tertinggi": {
+      "get": {
+        "tags": ["Akademik"],
+        "summary": "Get Tren IP Tertinggi",
+        "description": "Mengambil data tren IP tertinggi. Jika parameter 'semester' diberikan, akan mengembalikan IP tertinggi per angkatan untuk semester tsb. Jika tidak, akan mengembalikan IP tertinggi per semester untuk angkatan default. (Memerlukan autentikasi).",
+        "operationId": "getAkademikTrenIpTertinggi",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/SemesterQuery"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Data tren IP tertinggi (per angkatan atau per semester)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/AkademikTrenIpTertinggiAngkatan"
+                    },
+                    {
+                      "$ref": "#/components/schemas/AkademikTrenIpTertinggiSemester"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        }
+      }
+    },
+    "/api/v1/akademik/tipe-tes-masuk": {
+      "get": {
+        "tags": ["Akademik"],
+        "summary": "Get Tipe Tes Masuk",
+        "description": "Mengambil data tipe tes masuk mahasiswa. Dapat difilter berdasarkan 'kelas', 'prodi', atau default (angkatan). (Memerlukan autentikasi).",
+        "operationId": "getAkademikTipeTesMasuk",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/KelasQuery"
+          },
+          {
+            "$ref": "#/components/parameters/ProdiQuery"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Data tipe tes masuk (per angkatan, prodi, atau kelas)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/AkademikTipeTesMasukAngkatan"
+                    },
+                    {
+                      "$ref": "#/components/schemas/AkademikTipeTesMasukProdi"
+                    },
+                    {
+                      "$ref": "#/components/schemas/AkademikTipeTesMasukKelas"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        }
+      }
+    },
+    "/api/v1/mahasiswa/jumlah-mahasiswa": {
+      "get": {
+        "tags": ["Kemahasiswaan"],
+        "summary": "Get Jumlah Mahasiswa",
+        "description": "Mengambil data jumlah mahasiswa. Jika parameter 'prodi' diberikan, akan mengembalikan jumlah per kelas dalam prodi tsb. Jika tidak, akan mengembalikan jumlah per prodi dalam angkatan default. (Memerlukan autentikasi).",
+        "operationId": "getMahasiswaJumlahMahasiswa",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ProdiQuery"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Data jumlah mahasiswa (per prodi atau per kelas)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/MahasiswaJumlahAngkatan"
+                    },
+                    {
+                      "$ref": "#/components/schemas/MahasiswaJumlahProdi"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        }
+      }
+    },
+    "/api/v1/mahasiswa/gender": {
+      "get": {
+        "tags": ["Kemahasiswaan"],
+        "summary": "Get Mahasiswa Gender",
+        "description": "Mengambil data agregat jenis kelamin mahasiswa. Dapat difilter berdasarkan 'kelas', 'prodi', atau default (angkatan). (Memerlukan autentikasi).",
+        "operationId": "getMahasiswaGender",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/KelasQuery"
+          },
+          {
+            "$ref": "#/components/parameters/ProdiQuery"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Data jenis kelamin mahasiswa (per angkatan, prodi, atau kelas)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/MahasiswaGenderAngkatan"
+                    },
+                    {
+                      "$ref": "#/components/schemas/MahasiswaGenderProdi"
+                    },
+                    {
+                      "$ref": "#/components/schemas/MahasiswaGenderKelas"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        }
+      }
+    },
+    "/api/v1/mahasiswa/jenis-slta": {
+      "get": {
+        "tags": ["Kemahasiswaan"],
+        "summary": "Get Mahasiswa Jenis SLTA",
+        "description": "Mengambil data agregat jenis SLTA mahasiswa. Dapat difilter berdasarkan 'kelas', 'prodi', atau default (angkatan). (Memerlukan autentikasi).",
+        "operationId": "getMahasiswaJenisSlta",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/KelasQuery"
+          },
+          {
+            "$ref": "#/components/parameters/ProdiQuery"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Data jenis SLTA mahasiswa (per angkatan, prodi, atau kelas)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/MahasiswaSltaAngkatan"
+                    },
+                    {
+                      "$ref": "#/components/schemas/MahasiswaSltaProdi"
+                    },
+                    {
+                      "$ref": "#/components/schemas/MahasiswaSltaKelas"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        }
+      }
+    },
+    "/api/v1/mahasiswa/agama": {
+      "get": {
+        "tags": ["Kemahasiswaan"],
+        "summary": "Get Mahasiswa Agama",
+        "description": "Mengambil data agregat agama mahasiswa. Dapat difilter berdasarkan 'kelas', 'prodi', atau default (angkatan). (Memerlukan autentikasi).",
+        "operationId": "getMahasiswaAgama",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/KelasQuery"
+          },
+          {
+            "$ref": "#/components/parameters/ProdiQuery"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Data agama mahasiswa (per angkatan, prodi, atau kelas)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/MahasiswaAgamaAngkatan"
+                    },
+                    {
+                      "$ref": "#/components/schemas/MahasiswaAgamaProdi"
+                    },
+                    {
+                      "$ref": "#/components/schemas/MahasiswaAgamaKelas"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": ["message"]
+      },
+      "GeoPoint": {
+        "type": "object",
+        "properties": {
+          "lat": {
+            "type": "number",
+            "format": "double"
+          },
+          "lng": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "JenisTotal": {
+        "type": "object",
+        "properties": {
+          "jenis": {
+            "type": "string"
+          },
+          "total": {
+            "type": "integer"
+          }
+        }
+      },
+      "JenisTotalArray": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JenisTotal"
+            }
+          }
+        }
+      },
+      "AgamaTotal": {
+        "type": "object",
+        "properties": {
+          "agama": {
+            "type": "string"
+          },
+          "total": {
+            "type": "integer"
+          }
+        }
+      },
+      "AgamaTotalArray": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgamaTotal"
+            }
+          }
+        }
+      },
+      "TipeTotal": {
+        "type": "object",
+        "properties": {
+          "tipe": {
+            "type": "string"
+          },
+          "total": {
+            "type": "integer"
+          }
+        }
+      },
+      "SemesterIp": {
+        "type": "object",
+        "properties": {
+          "semester": {
+            "type": "integer"
+          },
+          "ip": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      },
+      "AngkatanIp": {
+        "type": "object",
+        "properties": {
+          "angkatan": {
+            "type": "string"
+          },
+          "ip": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      },
+      "ProdiTotal": {
+        "type": "object",
+        "properties": {
+          "prodi": {
+            "type": "string"
+          },
+          "total": {
+            "type": "integer"
+          }
+        }
+      },
+      "KelasTotal": {
+        "type": "object",
+        "properties": {
+          "kelas": {
+            "type": "string"
+          },
+          "total": {
+            "type": "integer"
+          }
+        }
+      },
+      "IndeksNilai": {
+        "type": "object",
+        "properties": {
+          "indeks": {
+            "type": "string"
+          },
+          "total": {
+            "type": "integer"
+          }
+        }
+      },
+      "MataKuliahNilai": {
+        "type": "object",
+        "properties": {
+          "mata_kuliah": {
+            "type": "string"
+          },
+          "indeks_nilai": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IndeksNilai"
+            }
+          }
+        }
+      },
+      "GuestRasioDosenMhs": {
+        "type": "object",
+        "properties": {
+          "rasio": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string"
+              },
+              "fraction": {
+                "type": "number",
+                "format": "float"
+              }
+            }
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JenisTotal"
+            }
+          }
+        }
+      },
+      "GuestDomisiliAll": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "provinsi": {
+                  "type": "string"
+                },
+                "total": {
+                  "type": "integer"
+                },
+                "geo": {
+                  "$ref": "#/components/schemas/GeoPoint"
+                }
+              }
+            }
+          }
+        }
+      },
+      "GuestDomisiliProvinsi": {
+        "type": "object",
+        "properties": {
+          "provinsi": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "kota": {
+                  "type": "string"
+                },
+                "total": {
+                  "type": "integer"
+                },
+                "geo": {
+                  "$ref": "#/components/schemas/GeoPoint"
+                }
+              }
+            }
+          }
+        }
+      },
+      "AkademikDistribusiNilai": {
+        "type": "object",
+        "properties": {
+          "angkatan": {
+            "type": "string"
+          },
+          "prodi": {
+            "type": "string"
+          },
+          "semester": {
+            "type": "integer"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MataKuliahNilai"
+            }
+          }
+        }
+      },
+      "AkademikTrenIpRataRata": {
+        "type": "object",
+        "properties": {
+          "angkatan": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SemesterIp"
+            }
+          }
+        }
+      },
+      "AkademikTrenIpTertinggiAngkatan": {
+        "type": "object",
+        "properties": {
+          "angkatan": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SemesterIp"
+            }
+          }
+        }
+      },
+      "AkademikTrenIpTertinggiSemester": {
+        "type": "object",
+        "properties": {
+          "semester": {
+            "type": "integer"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AngkatanIp"
+            }
+          }
+        }
+      },
+      "AkademikTipeTesMasukAngkatan": {
+        "type": "object",
+        "properties": {
+          "angkatan": {
+            "type": "string"
+          },
+          "prodi": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TipeTotal"
+            }
+          }
+        }
+      },
+      "AkademikTipeTesMasukProdi": {
+        "type": "object",
+        "properties": {
+          "angkatan": {
+            "type": "string"
+          },
+          "prodi": {
+            "type": "string"
+          },
+          "kelas": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TipeTotal"
+            }
+          }
+        }
+      },
+      "AkademikTipeTesMasukKelas": {
+        "type": "object",
+        "properties": {
+          "angkatan": {
+            "type": "string"
+          },
+          "prodi": {
+            "type": "string"
+          },
+          "kelas": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TipeTotal"
+            }
+          }
+        }
+      },
+      "MahasiswaJumlahAngkatan": {
+        "type": "object",
+        "properties": {
+          "angkatan": {
+            "type": "string"
+          },
+          "prodi": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProdiTotal"
+            }
+          }
+        }
+      },
+      "MahasiswaJumlahProdi": {
+        "type": "object",
+        "properties": {
+          "angkatan": {
+            "type": "string"
+          },
+          "prodi": {
+            "type": "string"
+          },
+          "kelas": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KelasTotal"
+            }
+          }
+        }
+      },
+      "MahasiswaGenderAngkatan": {
+        "type": "object",
+        "properties": {
+          "angkatan": {
+            "type": "string"
+          },
+          "prodi": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JenisTotal"
+            }
+          }
+        }
+      },
+      "MahasiswaGenderProdi": {
+        "type": "object",
+        "properties": {
+          "angkatan": {
+            "type": "string"
+          },
+          "prodi": {
+            "type": "string"
+          },
+          "kelas": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JenisTotal"
+            }
+          }
+        }
+      },
+      "MahasiswaGenderKelas": {
+        "type": "object",
+        "properties": {
+          "angkatan": {
+            "type": "string"
+          },
+          "prodi": {
+            "type": "string"
+          },
+          "kelas": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JenisTotal"
+            }
+          }
+        }
+      },
+      "MahasiswaSltaAngkatan": {
+        "type": "object",
+        "properties": {
+          "angkatan": {
+            "type": "string"
+          },
+          "prodi": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JenisTotal"
+            }
+          }
+        }
+      },
+      "MahasiswaSltaProdi": {
+        "type": "object",
+        "properties": {
+          "angkatan": {
+            "type": "string"
+          },
+          "prodi": {
+            "type": "string"
+          },
+          "kelas": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JenisTotal"
+            }
+          }
+        }
+      },
+      "MahasiswaSltaKelas": {
+        "type": "object",
+        "properties": {
+          "angkatan": {
+            "type": "string"
+          },
+          "prodi": {
+            "type": "string"
+          },
+          "kelas": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JenisTotal"
+            }
+          }
+        }
+      },
+      "MahasiswaAgamaAngkatan": {
+        "type": "object",
+        "properties": {
+          "angkatan": {
+            "type": "string"
+          },
+          "prodi": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgamaTotal"
+            }
+          }
+        }
+      },
+      "MahasiswaAgamaProdi": {
+        "type": "object",
+        "properties": {
+          "angkatan": {
+            "type": "string"
+          },
+          "prodi": {
+            "type": "string"
+          },
+          "kelas": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgamaTotal"
+            }
+          }
+        }
+      },
+      "MahasiswaAgamaKelas": {
+        "type": "object",
+        "properties": {
+          "angkatan": {
+            "type": "string"
+          },
+          "prodi": {
+            "type": "string"
+          },
+          "kelas": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgamaTotal"
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "ProvinsiQuery": {
+        "name": "provinsi",
+        "in": "query",
+        "description": "Filter berdasarkan nama provinsi.",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "SemesterQuery": {
+        "name": "semester",
+        "in": "query",
+        "description": "Filter berdasarkan semester.",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "ProdiQuery": {
+        "name": "prodi",
+        "in": "query",
+        "description": "Filter berdasarkan kode program studi.",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "KelasQuery": {
+        "name": "kelas",
+        "in": "query",
+        "description": "Filter berdasarkan nama kelas.",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "Kesalahan request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "example": {
+              "message": "Kesalahan request"
+            }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "Anda harus login terlebih dahulu",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "example": {
+              "message": "Anda harus login terlebih dahulu"
+            }
+          }
+        }
+      },
+      "Forbidden": {
+        "description": "Anda tidak memiliki izin untuk melakukan hal tersebut",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "example": {
+              "message": "Anda tidak memiliki izin untuk melakukan hal tersebut"
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "Resource tidak ditemukan!",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "example": {
+              "message": "Resource tidak ditemukan!"
+            }
+          }
+        }
+      },
+      "InternalServerError": {
+        "description": "Kesalahan server",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "example": {
+              "message": "Kesalahan server"
+            }
+          }
+        }
+      }
+    }
+  }
+}
