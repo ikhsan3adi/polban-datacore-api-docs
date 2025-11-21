@@ -39,6 +39,10 @@
     {
       "name": "Kemahasiswaan",
       "description": "Endpoint terkait data kemahasiswaan (memerlukan autentikasi)."
+    },
+    {
+      "name": "DataCore",
+      "description": "Endpoint khusus admin DataCore."
     }
   ],
   "paths": {
@@ -165,6 +169,14 @@
             "BearerAuth": []
           }
         ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AngkatanQuery"
+          },
+          {
+            "$ref": "#/components/parameters/ProdiQuery"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Data distribusi nilai",
@@ -194,6 +206,11 @@
         "security": [
           {
             "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AngkatanQuery"
           }
         ],
         "responses": {
@@ -230,6 +247,9 @@
         "parameters": [
           {
             "$ref": "#/components/parameters/SemesterQuery"
+          },
+          {
+            "$ref": "#/components/parameters/AngkatanQuery"
           }
         ],
         "responses": {
@@ -272,10 +292,13 @@
         ],
         "parameters": [
           {
-            "$ref": "#/components/parameters/KelasQuery"
+            "$ref": "#/components/parameters/AngkatanQuery"
           },
           {
             "$ref": "#/components/parameters/ProdiQuery"
+          },
+          {
+            "$ref": "#/components/parameters/KelasQuery"
           }
         ],
         "responses": {
@@ -321,6 +344,9 @@
         ],
         "parameters": [
           {
+            "$ref": "#/components/parameters/AngkatanQuery"
+          },
+          {
             "$ref": "#/components/parameters/ProdiQuery"
           }
         ],
@@ -363,6 +389,9 @@
           }
         ],
         "parameters": [
+          {
+            "$ref": "#/components/parameters/AngkatanQuery"
+          },
           {
             "$ref": "#/components/parameters/KelasQuery"
           },
@@ -413,6 +442,9 @@
         ],
         "parameters": [
           {
+            "$ref": "#/components/parameters/AngkatanQuery"
+          },
+          {
             "$ref": "#/components/parameters/KelasQuery"
           },
           {
@@ -462,6 +494,9 @@
         ],
         "parameters": [
           {
+            "$ref": "#/components/parameters/AngkatanQuery"
+          },
+          {
             "$ref": "#/components/parameters/KelasQuery"
           },
           {
@@ -485,6 +520,137 @@
                       "$ref": "#/components/schemas/MahasiswaAgamaKelas"
                     }
                   ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        }
+      }
+    },
+    "/api/jobs/run": {
+      "post": {
+        "tags": ["DataCore"],
+        "summary": "Trigger sync & aggregation job",
+        "description": "Melakukan manual trigger untuk proses sinkronisasi dan agregasi data. (Memerlukan autentikasi).",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "jobName": {
+                    "type": "string",
+                    "example": "full-sync-and-aggregate"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Queue result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "queueId": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "example": "2025-11-16T09:55:09Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        }
+      }
+    },
+    "/api/etl/debug/fullSync": {
+      "get": {
+        "tags": ["DataCore"],
+        "summary": "[DEBUG ONLY] Direct sync & aggr trigger without queue/job",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        }
+      }
+    },
+    "/api/etl/datahub/debug/mahasiswa": {
+      "get": {
+        "tags": ["DataCore"],
+        "summary": "[DEBUG ONLY] Debug DataHub API",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "properties": {
+                      "angkatan": {
+                        "type": "number",
+                        "example": "2024"
+                      },
+                      "kelas": {},
+                      "agama": {},
+                      "jenis_kelamin": {
+                        "example": "L",
+                        "maxLength": 1
+                      },
+                      "provinsi": {
+                        "type": "object"
+                      },
+                      "wilayah": {
+                        "type": "object"
+                      },
+                      "slta": {
+                        "type": "object"
+                      },
+                      "jalur_daftar": {
+                        "type": "object"
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -1089,6 +1255,15 @@
         "name": "provinsi",
         "in": "query",
         "description": "Filter berdasarkan nama provinsi.",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "AngkatanQuery": {
+        "name": "angkatan",
+        "in": "query",
+        "description": "Filter berdasarkan angkatan.",
         "required": false,
         "schema": {
           "type": "string"
