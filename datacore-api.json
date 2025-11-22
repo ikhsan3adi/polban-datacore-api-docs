@@ -533,6 +533,114 @@
         }
       }
     },
+    "/api/auth/login": {
+      "post": {
+        "tags": ["DataCore"],
+        "summary": "Admin Login",
+        "description": "Using DataHub API",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Login Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "token": {
+                      "type": "string"
+                    },
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "email": {
+                          "type": "string"
+                        },
+                        "role": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized/Wrong Credentials",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "error": {
+                      "type": "string"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "example": "401"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/logout": {
+      "post": {
+        "tags": ["DataCore"],
+        "summary": "Admin Logout",
+        "description": "Using DataHub API",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/jobs/run": {
       "post": {
         "tags": ["DataCore"],
@@ -588,9 +696,106 @@
         }
       }
     },
-    "/api/etl/debug/fullSync": {
+    "/api/jobs/schedules": {
       "get": {
         "tags": ["DataCore"],
+        "summary": "Get Scheduled Jobs",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Scheduled Jobs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "example": "qqchtxi6rakzpevjvmo2wu52"
+                      },
+                      "jobName": {
+                        "type": "string",
+                        "example": "full-sync-and-aggregate"
+                      },
+                      "cronExpression": {
+                        "type": "string",
+                        "example": "0 0 * * *"
+                      },
+                      "description": {
+                        "type": "string",
+                        "example": "Full Sync & Aggregation"
+                      },
+                      "isActive": {
+                        "type": "boolean",
+                        "example": true
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "example": "2025-11-21T11:34:42.108Z"
+                      },
+                      "updatedAt": {
+                        "type": "string",
+                        "example": "2025-11-21T14:26:54.329Z"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["DataCore"],
+        "summary": "Create/Update Scheduled Jobs",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "jobName": {
+                    "type": "string",
+                    "example": "full-sync-and-aggregate"
+                  },
+                  "cronExpression": {
+                    "type": "string",
+                    "example": "0 0 * * *"
+                  },
+                  "description": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "2XX": {
+            "description": "Created/Updated",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Schedule for full-sync-and-aggregate updated to '0 0 * * *'"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/etl/debug/fullSync": {
+      "get": {
+        "tags": ["DataCore Debug"],
         "summary": "[DEBUG ONLY] Direct sync & aggr trigger without queue/job",
         "security": [
           {
@@ -612,7 +817,7 @@
     },
     "/api/etl/datahub/debug/mahasiswa": {
       "get": {
-        "tags": ["DataCore"],
+        "tags": ["DataCore Debug"],
         "summary": "[DEBUG ONLY] Debug DataHub API",
         "security": [
           {
@@ -625,14 +830,19 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "type": "array",
                   "items": {
                     "properties": {
                       "angkatan": {
                         "type": "number",
                         "example": "2024"
                       },
-                      "kelas": {},
-                      "agama": {},
+                      "kelas": {
+                        "type": "string"
+                      },
+                      "agama": {
+                        "type": "string"
+                      },
                       "jenis_kelamin": {
                         "example": "L",
                         "maxLength": 1
