@@ -641,6 +641,326 @@
         }
       }
     },
+    "/api/datacore/dashboard/stats": {
+      "get": {
+        "tags": ["DataCore"],
+        "summary": "Data statistik dashboard ringkas",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "lastSync": {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "string",
+                          "example": "success"
+                        },
+                        "finishedAt": {
+                          "type": "string",
+                          "description": "Date",
+                          "example": "2025-11-23T04:08:22.617Z"
+                        },
+                        "duration": {
+                          "type": "string",
+                          "example": "0.1s"
+                        }
+                      }
+                    },
+                    "queue": {
+                      "type": "object",
+                      "properties": {
+                        "active": {
+                          "type": "integer"
+                        },
+                        "waiting": {
+                          "type": "integer"
+                        },
+                        "failed": {
+                          "type": "integer",
+                          "example": 6
+                        }
+                      }
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "totalMahasiswa": {
+                          "type": "number",
+                          "example": 253
+                        },
+                        "totalDosen": {
+                          "type": "number"
+                        },
+                        "totalDataAkademik": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        }
+      }
+    },
+    "/api/datacore/jobs/history": {
+      "get": {
+        "tags": ["DataCore"],
+        "summary": "Get all ETL job history",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "jobName": {
+                            "type": "string"
+                          },
+                          "status": {
+                            "type": "string"
+                          },
+                          "triggeredBy": {
+                            "type": "string",
+                            "example": "cron"
+                          },
+                          "startTime": {
+                            "type": "string",
+                            "description": "Date"
+                          },
+                          "endTime": {
+                            "type": "string",
+                            "description": "Date"
+                          },
+                          "duration": {
+                            "type": "string",
+                            "example": "0.1s"
+                          }
+                        }
+                      }
+                    },
+                    "meta": {
+                      "properties": {
+                        "total": {
+                          "type": "integer"
+                        },
+                        "page": {
+                          "type": "integer"
+                        },
+                        "perPage": {
+                          "type": "integer"
+                        },
+                        "lastPage": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        }
+      }
+    },
+    "/api/datacore/jobs/history/{id}": {
+      "get": {
+        "tags": ["DataCore"],
+        "summary": "Get single ETL job history",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The etl_job_log id",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "jobName": {
+                          "type": "string"
+                        },
+                        "status": {
+                          "type": "string"
+                        },
+                        "triggeredBy": {
+                          "type": "string",
+                          "example": "cron"
+                        },
+                        "startTime": {
+                          "type": "string",
+                          "description": "Date"
+                        },
+                        "endTime": {
+                          "type": "string",
+                          "description": "Date"
+                        },
+                        "logMessage": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        }
+      }
+    },
+    "/api/datacore/cache/keys": {
+      "get": {
+        "tags": ["DataCore"],
+        "summary": "[JSON Viewer] Get All Cache keys",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "example": [
+                        "guest:mahasiswa:gender",
+                        "guest:mahasiswa:domisili:all",
+                        "guest:mahasiswa:agama",
+                        "guest:mahasiswa:jenis-slta",
+                        "guest:mahasiswa:domisili:provinsi:jawa_barat",
+                        "guest:mahasiswa:domisili:provinsi:dki_jakarta",
+                        "guest:mahasiswa:domisili:provinsi:jawa_tengah",
+                        "kemahasiswaan:gender",
+                        "kemahasiswaan:jenis-slta",
+                        "kemahasiswaan:agama",
+                        "akademik:tipe-tes-masuk"
+                      ],
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        }
+      }
+    },
+    "/api/datacore/cache/{key}": {
+      "get": {
+        "tags": ["DataCore"],
+        "summary": "[JSON Viewer] Get JSON Cache Detail",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "key",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "example": "guest:mahasiswa:gender"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "jsonData": {
+                      "type": "object",
+                      "description": "Actual json cache data"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        }
+      }
+    },
     "/api/jobs/run": {
       "post": {
         "tags": ["DataCore"],
@@ -711,42 +1031,52 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "properties": {
-                      "id": {
-                        "type": "string",
-                        "example": "qqchtxi6rakzpevjvmo2wu52"
-                      },
-                      "jobName": {
-                        "type": "string",
-                        "example": "full-sync-and-aggregate"
-                      },
-                      "cronExpression": {
-                        "type": "string",
-                        "example": "0 0 * * *"
-                      },
-                      "description": {
-                        "type": "string",
-                        "example": "Full Sync & Aggregation"
-                      },
-                      "isActive": {
-                        "type": "boolean",
-                        "example": true
-                      },
-                      "createdAt": {
-                        "type": "string",
-                        "example": "2025-11-21T11:34:42.108Z"
-                      },
-                      "updatedAt": {
-                        "type": "string",
-                        "example": "2025-11-21T14:26:54.329Z"
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "example": "qqchtxi6rakzpevjvmo2wu52"
+                          },
+                          "jobName": {
+                            "type": "string",
+                            "example": "full-sync-and-aggregate"
+                          },
+                          "cronExpression": {
+                            "type": "string",
+                            "example": "0 0 * * *"
+                          },
+                          "description": {
+                            "type": "string",
+                            "example": "Full Sync & Aggregation"
+                          },
+                          "isActive": {
+                            "type": "boolean",
+                            "example": true
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "example": "2025-11-21T11:34:42.108Z"
+                          },
+                          "updatedAt": {
+                            "type": "string",
+                            "example": "2025-11-21T14:26:54.329Z"
+                          }
+                        }
                       }
                     }
                   }
                 }
               }
             }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         }
       },
@@ -789,6 +1119,12 @@
                 }
               }
             }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         }
       }
@@ -889,6 +1225,12 @@
         "properties": {
           "message": {
             "type": "string"
+          },
+          "error": {
+            "type": "string"
+          },
+          "statusCore": {
+            "type": "integer"
           }
         },
         "required": ["message"]
@@ -1529,7 +1871,9 @@
               "$ref": "#/components/schemas/Error"
             },
             "example": {
-              "message": "Anda harus login terlebih dahulu"
+              "message": "Anda harus login terlebih dahulu",
+              "error": "Unauthorized",
+              "statusCode": 401
             }
           }
         }
@@ -1542,7 +1886,9 @@
               "$ref": "#/components/schemas/Error"
             },
             "example": {
-              "message": "Anda tidak memiliki izin untuk melakukan hal tersebut"
+              "message": "Anda tidak memiliki izin untuk melakukan hal tersebut",
+              "error": "Forbidden",
+              "statusCode": 403
             }
           }
         }
