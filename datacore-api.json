@@ -42,7 +42,7 @@
     },
     {
       "name": "DataCore",
-      "description": "Endpoint khusus admin DataCore."
+      "description": "Endpoint autentikasi dan admin DataCore."
     }
   ],
   "paths": {
@@ -536,7 +536,7 @@
     "/api/auth/login": {
       "post": {
         "tags": ["DataCore"],
-        "summary": "Admin Login",
+        "summary": "Login untuk DataCore dan DataView",
         "description": "Using DataHub API",
         "requestBody": {
           "content": {
@@ -616,7 +616,7 @@
     "/api/auth/logout": {
       "post": {
         "tags": ["DataCore"],
-        "summary": "Admin Logout",
+        "summary": "Logout untuk DataCore dan DataView",
         "description": "Using DataHub API",
         "security": [
           {
