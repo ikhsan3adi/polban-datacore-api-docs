@@ -2,7 +2,7 @@
   "openapi": "3.0.2",
   "info": {
     "title": "Polban DataVerse - DataCore API",
-    "version": "1.0",
+    "version": "1.1.1",
     "contact": {
       "name": "Ikhsan Satriadi",
       "email": "ikhsan.satriadi.tif24@polban.ac.id",
@@ -29,15 +29,15 @@
   ],
   "tags": [
     {
-      "name": "Guest",
+      "name": "DataView - Guest",
       "description": "Endpoint publik tanpa autentikasi."
     },
     {
-      "name": "Akademik",
+      "name": "DataView - Akademik",
       "description": "Endpoint terkait data akademik (memerlukan autentikasi)."
     },
     {
-      "name": "Kemahasiswaan",
+      "name": "DataView - Kemahasiswaan",
       "description": "Endpoint terkait data kemahasiswaan (memerlukan autentikasi)."
     },
     {
@@ -48,7 +48,7 @@
   "paths": {
     "/api/v1/guest/mahasiswa/gender": {
       "get": {
-        "tags": ["Guest"],
+        "tags": ["DataView - Guest"],
         "summary": "Get Mahasiswa Gender (Guest)",
         "description": "Mengambil data agregat jumlah mahasiswa berdasarkan jenis kelamin untuk semua angkatan.",
         "operationId": "getGuestMahasiswaGender",
@@ -68,7 +68,7 @@
     },
     "/api/v1/guest/mahasiswa/jenis-slta": {
       "get": {
-        "tags": ["Guest"],
+        "tags": ["DataView - Guest"],
         "summary": "Get Mahasiswa Jenis SLTA (Guest)",
         "description": "Mengambil data agregat jumlah mahasiswa berdasarkan jenis SLTA untuk semua angkatan.",
         "operationId": "getGuestMahasiswaJenisSlta",
@@ -88,7 +88,7 @@
     },
     "/api/v1/guest/mahasiswa/rasio-dosen-mhs": {
       "get": {
-        "tags": ["Guest"],
+        "tags": ["DataView - Guest"],
         "summary": "Get Rasio Dosen dan Mahasiswa (Guest)",
         "description": "Mengambil data rasio total dosen terhadap total mahasiswa.",
         "operationId": "getGuestMahasiswaRasioDosenMhs",
@@ -108,7 +108,7 @@
     },
     "/api/v1/guest/mahasiswa/domisili": {
       "get": {
-        "tags": ["Guest"],
+        "tags": ["DataView - Guest"],
         "summary": "Get Persebaran Domisili Mahasiswa (Guest)",
         "description": "Mengambil data persebaran domisili mahasiswa. Jika parameter 'provinsi' diberikan, akan mengembalikan persebaran kota di provinsi tersebut. Jika tidak, akan mengembalikan persebaran provinsi.",
         "operationId": "getGuestMahasiswaDomisili",
@@ -140,7 +140,7 @@
     },
     "/api/v1/guest/mahasiswa/agama": {
       "get": {
-        "tags": ["Guest"],
+        "tags": ["DataView - Guest"],
         "summary": "Get Mahasiswa Agama (Guest)",
         "description": "Mengambil data agregat jumlah mahasiswa berdasarkan agama untuk semua angkatan.",
         "operationId": "getGuestMahasiswaAgama",
@@ -158,9 +158,29 @@
         }
       }
     },
+    "/api/v1/guest/akademik/tipe-tes-masuk": {
+      "get": {
+        "tags": ["DataView - Guest"],
+        "summary": "Get Tipe Tes Masuk (Guest)",
+        "description": "Mengambil data tipe tes masuk mahasiswa keseluruhan.",
+        "operationId": "getAkademikTipeTesMasuk",
+        "responses": {
+          "200": {
+            "description": "Data tipe tes masuk (all)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AkademikTipeTesMasukAll"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/akademik/distribusi-nilai": {
       "get": {
-        "tags": ["Akademik"],
+        "tags": ["DataView - Akademik"],
         "summary": "Get Distribusi Nilai",
         "description": "Mengambil data distribusi indeks nilai per mata kuliah. (Memerlukan autentikasi).",
         "operationId": "getAkademikDistribusiNilai",
@@ -199,7 +219,7 @@
     },
     "/api/v1/akademik/tren-ip-rata-rata": {
       "get": {
-        "tags": ["Akademik"],
+        "tags": ["DataView - Akademik"],
         "summary": "Get Tren IP Rata-Rata",
         "description": "Mengambil data tren IP rata-rata per semester untuk angkatan tertentu. (Memerlukan autentikasi).",
         "operationId": "getAkademikTrenIpRataRata",
@@ -235,7 +255,7 @@
     },
     "/api/v1/akademik/tren-ip-tertinggi": {
       "get": {
-        "tags": ["Akademik"],
+        "tags": ["DataView - Akademik"],
         "summary": "Get Tren IP Tertinggi",
         "description": "Mengambil data tren IP tertinggi. Jika parameter 'semester' diberikan, akan mengembalikan IP tertinggi per angkatan untuk semester tsb. Jika tidak, akan mengembalikan IP tertinggi per semester untuk angkatan default. (Memerlukan autentikasi).",
         "operationId": "getAkademikTrenIpTertinggi",
@@ -281,7 +301,7 @@
     },
     "/api/v1/akademik/tipe-tes-masuk": {
       "get": {
-        "tags": ["Akademik"],
+        "tags": ["DataView - Akademik"],
         "summary": "Get Tipe Tes Masuk",
         "description": "Mengambil data tipe tes masuk mahasiswa. Dapat difilter berdasarkan 'kelas', 'prodi', atau default (angkatan). (Memerlukan autentikasi).",
         "operationId": "getAkademikTipeTesMasuk",
@@ -333,7 +353,7 @@
     },
     "/api/v1/mahasiswa/jumlah-mahasiswa": {
       "get": {
-        "tags": ["Kemahasiswaan"],
+        "tags": ["DataView - Kemahasiswaan"],
         "summary": "Get Jumlah Mahasiswa",
         "description": "Mengambil data jumlah mahasiswa. Jika parameter 'prodi' diberikan, akan mengembalikan jumlah per kelas dalam prodi tsb. Jika tidak, akan mengembalikan jumlah per prodi dalam angkatan default. (Memerlukan autentikasi).",
         "operationId": "getMahasiswaJumlahMahasiswa",
@@ -379,7 +399,7 @@
     },
     "/api/v1/mahasiswa/gender": {
       "get": {
-        "tags": ["Kemahasiswaan"],
+        "tags": ["DataView - Kemahasiswaan"],
         "summary": "Get Mahasiswa Gender",
         "description": "Mengambil data agregat jenis kelamin mahasiswa. Dapat difilter berdasarkan 'kelas', 'prodi', atau default (angkatan). (Memerlukan autentikasi).",
         "operationId": "getMahasiswaGender",
@@ -431,7 +451,7 @@
     },
     "/api/v1/mahasiswa/jenis-slta": {
       "get": {
-        "tags": ["Kemahasiswaan"],
+        "tags": ["DataView - Kemahasiswaan"],
         "summary": "Get Mahasiswa Jenis SLTA",
         "description": "Mengambil data agregat jenis SLTA mahasiswa. Dapat difilter berdasarkan 'kelas', 'prodi', atau default (angkatan). (Memerlukan autentikasi).",
         "operationId": "getMahasiswaJenisSlta",
@@ -483,7 +503,7 @@
     },
     "/api/v1/mahasiswa/agama": {
       "get": {
-        "tags": ["Kemahasiswaan"],
+        "tags": ["DataView - Kemahasiswaan"],
         "summary": "Get Mahasiswa Agama",
         "description": "Mengambil data agregat agama mahasiswa. Dapat difilter berdasarkan 'kelas', 'prodi', atau default (angkatan). (Memerlukan autentikasi).",
         "operationId": "getMahasiswaAgama",
@@ -1502,6 +1522,17 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AngkatanIp"
+            }
+          }
+        }
+      },
+      "AkademikTipeTesMasukAll": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TipeTotal"
             }
           }
         }
