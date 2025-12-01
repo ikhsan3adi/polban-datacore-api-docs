@@ -53,7 +53,6 @@
         ],
         "summary": "Get Mahasiswa Gender (Guest)",
         "description": "Mengambil data agregat jumlah mahasiswa berdasarkan jenis kelamin untuk semua angkatan.",
-        "operationId": "getGuestMahasiswaGender",
         "responses": {
           "200": {
             "description": "Data jenis kelamin mahasiswa (Guest)",
@@ -75,7 +74,6 @@
         ],
         "summary": "Get Mahasiswa Jenis SLTA (Guest)",
         "description": "Mengambil data agregat jumlah mahasiswa berdasarkan jenis SLTA untuk semua angkatan.",
-        "operationId": "getGuestMahasiswaJenisSlta",
         "responses": {
           "200": {
             "description": "Data jenis SLTA mahasiswa (Guest)",
@@ -97,7 +95,6 @@
         ],
         "summary": "Get Rasio Dosen dan Mahasiswa (Guest)",
         "description": "Mengambil data rasio total dosen terhadap total mahasiswa.",
-        "operationId": "getGuestMahasiswaRasioDosenMhs",
         "responses": {
           "200": {
             "description": "Data rasio dosen dan mahasiswa",
@@ -119,7 +116,6 @@
         ],
         "summary": "Get Persebaran Domisili Mahasiswa (Guest)",
         "description": "Mengambil data persebaran domisili mahasiswa. Jika parameter 'provinsi' diberikan, akan mengembalikan persebaran kota di provinsi tersebut. Jika tidak, akan mengembalikan persebaran provinsi.",
-        "operationId": "getGuestMahasiswaDomisili",
         "parameters": [
           {
             "$ref": "#/components/parameters/ProvinsiQuery"
@@ -153,7 +149,6 @@
         ],
         "summary": "Get Mahasiswa Agama (Guest)",
         "description": "Mengambil data agregat jumlah mahasiswa berdasarkan agama untuk semua angkatan.",
-        "operationId": "getGuestMahasiswaAgama",
         "responses": {
           "200": {
             "description": "Data agama mahasiswa (Guest)",
@@ -175,7 +170,6 @@
         ],
         "summary": "Get Tipe Tes Masuk (Guest)",
         "description": "Mengambil data tipe tes masuk mahasiswa keseluruhan.",
-        "operationId": "getAkademikTipeTesMasuk",
         "responses": {
           "200": {
             "description": "Data tipe tes masuk (all)",
@@ -197,7 +191,6 @@
         ],
         "summary": "Get Distribusi Nilai",
         "description": "Mengambil data distribusi indeks nilai per mata kuliah. (Memerlukan autentikasi).",
-        "operationId": "getAkademikDistribusiNilai",
         "security": [
           {
             "BearerAuth": []
@@ -238,7 +231,6 @@
         ],
         "summary": "Get Tren IP Rata-Rata",
         "description": "Mengambil data tren IP rata-rata per semester untuk angkatan tertentu. (Memerlukan autentikasi).",
-        "operationId": "getAkademikTrenIpRataRata",
         "security": [
           {
             "BearerAuth": []
@@ -276,7 +268,6 @@
         ],
         "summary": "Get Tren IP Tertinggi",
         "description": "Mengambil data tren IP tertinggi. Jika parameter 'semester' diberikan, akan mengembalikan IP tertinggi per angkatan untuk semester tsb. Jika tidak, akan mengembalikan IP tertinggi per semester untuk angkatan default. (Memerlukan autentikasi).",
-        "operationId": "getAkademikTrenIpTertinggi",
         "security": [
           {
             "BearerAuth": []
@@ -324,7 +315,6 @@
         ],
         "summary": "Get Tipe Tes Masuk",
         "description": "Mengambil data tipe tes masuk mahasiswa. Dapat difilter berdasarkan 'kelas', 'prodi', atau default (angkatan). (Memerlukan autentikasi).",
-        "operationId": "getAkademikTipeTesMasuk",
         "security": [
           {
             "BearerAuth": []
@@ -378,7 +368,6 @@
         ],
         "summary": "Get Jumlah Mahasiswa",
         "description": "Mengambil data jumlah mahasiswa. Jika parameter 'prodi' diberikan, akan mengembalikan jumlah per kelas dalam prodi tsb. Jika tidak, akan mengembalikan jumlah per prodi dalam angkatan default. (Memerlukan autentikasi).",
-        "operationId": "getMahasiswaJumlahMahasiswa",
         "security": [
           {
             "BearerAuth": []
@@ -426,7 +415,6 @@
         ],
         "summary": "Get Mahasiswa Gender",
         "description": "Mengambil data agregat jenis kelamin mahasiswa. Dapat difilter berdasarkan 'kelas', 'prodi', atau default (angkatan). (Memerlukan autentikasi).",
-        "operationId": "getMahasiswaGender",
         "security": [
           {
             "BearerAuth": []
@@ -480,7 +468,6 @@
         ],
         "summary": "Get Mahasiswa Jenis SLTA",
         "description": "Mengambil data agregat jenis SLTA mahasiswa. Dapat difilter berdasarkan 'kelas', 'prodi', atau default (angkatan). (Memerlukan autentikasi).",
-        "operationId": "getMahasiswaJenisSlta",
         "security": [
           {
             "BearerAuth": []
@@ -534,7 +521,6 @@
         ],
         "summary": "Get Mahasiswa Agama",
         "description": "Mengambil data agregat agama mahasiswa. Dapat difilter berdasarkan 'kelas', 'prodi', atau default (angkatan). (Memerlukan autentikasi).",
-        "operationId": "getMahasiswaAgama",
         "security": [
           {
             "BearerAuth": []
