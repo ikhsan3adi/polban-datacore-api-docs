@@ -48,7 +48,9 @@
   "paths": {
     "/api/v1/guest/mahasiswa/gender": {
       "get": {
-        "tags": ["DataView - Guest"],
+        "tags": [
+          "DataView - Guest"
+        ],
         "summary": "Get Mahasiswa Gender (Guest)",
         "description": "Mengambil data agregat jumlah mahasiswa berdasarkan jenis kelamin untuk semua angkatan.",
         "operationId": "getGuestMahasiswaGender",
@@ -68,7 +70,9 @@
     },
     "/api/v1/guest/mahasiswa/jenis-slta": {
       "get": {
-        "tags": ["DataView - Guest"],
+        "tags": [
+          "DataView - Guest"
+        ],
         "summary": "Get Mahasiswa Jenis SLTA (Guest)",
         "description": "Mengambil data agregat jumlah mahasiswa berdasarkan jenis SLTA untuk semua angkatan.",
         "operationId": "getGuestMahasiswaJenisSlta",
@@ -88,7 +92,9 @@
     },
     "/api/v1/guest/mahasiswa/rasio-dosen-mhs": {
       "get": {
-        "tags": ["DataView - Guest"],
+        "tags": [
+          "DataView - Guest"
+        ],
         "summary": "Get Rasio Dosen dan Mahasiswa (Guest)",
         "description": "Mengambil data rasio total dosen terhadap total mahasiswa.",
         "operationId": "getGuestMahasiswaRasioDosenMhs",
@@ -108,7 +114,9 @@
     },
     "/api/v1/guest/mahasiswa/domisili": {
       "get": {
-        "tags": ["DataView - Guest"],
+        "tags": [
+          "DataView - Guest"
+        ],
         "summary": "Get Persebaran Domisili Mahasiswa (Guest)",
         "description": "Mengambil data persebaran domisili mahasiswa. Jika parameter 'provinsi' diberikan, akan mengembalikan persebaran kota di provinsi tersebut. Jika tidak, akan mengembalikan persebaran provinsi.",
         "operationId": "getGuestMahasiswaDomisili",
@@ -140,7 +148,9 @@
     },
     "/api/v1/guest/mahasiswa/agama": {
       "get": {
-        "tags": ["DataView - Guest"],
+        "tags": [
+          "DataView - Guest"
+        ],
         "summary": "Get Mahasiswa Agama (Guest)",
         "description": "Mengambil data agregat jumlah mahasiswa berdasarkan agama untuk semua angkatan.",
         "operationId": "getGuestMahasiswaAgama",
@@ -160,7 +170,9 @@
     },
     "/api/v1/guest/akademik/tipe-tes-masuk": {
       "get": {
-        "tags": ["DataView - Guest"],
+        "tags": [
+          "DataView - Guest"
+        ],
         "summary": "Get Tipe Tes Masuk (Guest)",
         "description": "Mengambil data tipe tes masuk mahasiswa keseluruhan.",
         "operationId": "getAkademikTipeTesMasuk",
@@ -180,7 +192,9 @@
     },
     "/api/v1/akademik/distribusi-nilai": {
       "get": {
-        "tags": ["DataView - Akademik"],
+        "tags": [
+          "DataView - Akademik"
+        ],
         "summary": "Get Distribusi Nilai",
         "description": "Mengambil data distribusi indeks nilai per mata kuliah. (Memerlukan autentikasi).",
         "operationId": "getAkademikDistribusiNilai",
@@ -219,7 +233,9 @@
     },
     "/api/v1/akademik/tren-ip-rata-rata": {
       "get": {
-        "tags": ["DataView - Akademik"],
+        "tags": [
+          "DataView - Akademik"
+        ],
         "summary": "Get Tren IP Rata-Rata",
         "description": "Mengambil data tren IP rata-rata per semester untuk angkatan tertentu. (Memerlukan autentikasi).",
         "operationId": "getAkademikTrenIpRataRata",
@@ -255,7 +271,9 @@
     },
     "/api/v1/akademik/tren-ip-tertinggi": {
       "get": {
-        "tags": ["DataView - Akademik"],
+        "tags": [
+          "DataView - Akademik"
+        ],
         "summary": "Get Tren IP Tertinggi",
         "description": "Mengambil data tren IP tertinggi. Jika parameter 'semester' diberikan, akan mengembalikan IP tertinggi per angkatan untuk semester tsb. Jika tidak, akan mengembalikan IP tertinggi per semester untuk angkatan default. (Memerlukan autentikasi).",
         "operationId": "getAkademikTrenIpTertinggi",
@@ -301,7 +319,9 @@
     },
     "/api/v1/akademik/tipe-tes-masuk": {
       "get": {
-        "tags": ["DataView - Akademik"],
+        "tags": [
+          "DataView - Akademik"
+        ],
         "summary": "Get Tipe Tes Masuk",
         "description": "Mengambil data tipe tes masuk mahasiswa. Dapat difilter berdasarkan 'kelas', 'prodi', atau default (angkatan). (Memerlukan autentikasi).",
         "operationId": "getAkademikTipeTesMasuk",
@@ -353,7 +373,9 @@
     },
     "/api/v1/mahasiswa/jumlah-mahasiswa": {
       "get": {
-        "tags": ["DataView - Kemahasiswaan"],
+        "tags": [
+          "DataView - Kemahasiswaan"
+        ],
         "summary": "Get Jumlah Mahasiswa",
         "description": "Mengambil data jumlah mahasiswa. Jika parameter 'prodi' diberikan, akan mengembalikan jumlah per kelas dalam prodi tsb. Jika tidak, akan mengembalikan jumlah per prodi dalam angkatan default. (Memerlukan autentikasi).",
         "operationId": "getMahasiswaJumlahMahasiswa",
@@ -399,7 +421,9 @@
     },
     "/api/v1/mahasiswa/gender": {
       "get": {
-        "tags": ["DataView - Kemahasiswaan"],
+        "tags": [
+          "DataView - Kemahasiswaan"
+        ],
         "summary": "Get Mahasiswa Gender",
         "description": "Mengambil data agregat jenis kelamin mahasiswa. Dapat difilter berdasarkan 'kelas', 'prodi', atau default (angkatan). (Memerlukan autentikasi).",
         "operationId": "getMahasiswaGender",
@@ -451,7 +475,9 @@
     },
     "/api/v1/mahasiswa/jenis-slta": {
       "get": {
-        "tags": ["DataView - Kemahasiswaan"],
+        "tags": [
+          "DataView - Kemahasiswaan"
+        ],
         "summary": "Get Mahasiswa Jenis SLTA",
         "description": "Mengambil data agregat jenis SLTA mahasiswa. Dapat difilter berdasarkan 'kelas', 'prodi', atau default (angkatan). (Memerlukan autentikasi).",
         "operationId": "getMahasiswaJenisSlta",
@@ -503,7 +529,9 @@
     },
     "/api/v1/mahasiswa/agama": {
       "get": {
-        "tags": ["DataView - Kemahasiswaan"],
+        "tags": [
+          "DataView - Kemahasiswaan"
+        ],
         "summary": "Get Mahasiswa Agama",
         "description": "Mengambil data agregat agama mahasiswa. Dapat difilter berdasarkan 'kelas', 'prodi', atau default (angkatan). (Memerlukan autentikasi).",
         "operationId": "getMahasiswaAgama",
@@ -555,7 +583,9 @@
     },
     "/api/auth/login": {
       "post": {
-        "tags": ["DataCore"],
+        "tags": [
+          "DataCore"
+        ],
         "summary": "Login untuk DataCore dan DataView",
         "description": "Using DataHub API",
         "requestBody": {
@@ -635,7 +665,9 @@
     },
     "/api/auth/logout": {
       "post": {
-        "tags": ["DataCore"],
+        "tags": [
+          "DataCore"
+        ],
         "summary": "Logout untuk DataCore dan DataView",
         "description": "Using DataHub API",
         "security": [
@@ -663,7 +695,9 @@
     },
     "/api/datacore/dashboard/stats": {
       "get": {
-        "tags": ["DataCore"],
+        "tags": [
+          "DataCore"
+        ],
         "summary": "Data statistik dashboard ringkas",
         "security": [
           {
@@ -741,7 +775,9 @@
     },
     "/api/datacore/jobs/history": {
       "get": {
-        "tags": ["DataCore"],
+        "tags": [
+          "DataCore"
+        ],
         "summary": "Get all ETL job history",
         "security": [
           {
@@ -763,9 +799,9 @@
             "in": "query",
             "description": "Jumlah data per halaman",
             "required": false,
-            "default": 10,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "default": 10
             }
           }
         ],
@@ -840,7 +876,9 @@
     },
     "/api/datacore/jobs/history/{id}": {
       "get": {
-        "tags": ["DataCore"],
+        "tags": [
+          "DataCore"
+        ],
         "summary": "Get single ETL job history",
         "security": [
           {
@@ -910,7 +948,10 @@
     },
     "/api/datacore/cache/keys": {
       "get": {
-        "tags": ["DataCore"],
+        "tags": [
+          "DataCore"
+        ],
+        "deprecated": true,
         "summary": "[JSON Viewer] Get All Cache keys",
         "security": [
           {
@@ -959,7 +1000,10 @@
     },
     "/api/datacore/cache/{key}": {
       "get": {
-        "tags": ["DataCore"],
+        "tags": [
+          "DataCore"
+        ],
+        "deprecated": true,
         "summary": "[JSON Viewer] Get JSON Cache Detail",
         "security": [
           {
@@ -1002,9 +1046,241 @@
         }
       }
     },
+    "/api/datacore/inspector/mv": {
+      "get": {
+        "tags": [
+          "DataCore"
+        ],
+        "summary": "[MV Inspector] Get List of Materialized View names",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "example": [
+                        "mv_mahasiswa_gender",
+                        "mv_mahasiswa_agama",
+                        "mv_mahasiswa_slta_kategori",
+                        "mv_mahasiswa_jalur_daftar",
+                        "mv_mahasiswa_total",
+                        "mv_mahasiswa_domisili"
+                      ],
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        }
+      }
+    },
+    "/api/datacore/inspector/mv/{mvName}": {
+      "get": {
+        "tags": [
+          "DataCore"
+        ],
+        "summary": "[MV Inspector] Get Detailed Materialized View Data",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "mvName",
+            "required": true,
+            "in": "path",
+            "description": "Materialized View Table Name",
+            "schema": {
+              "type": "string",
+              "example": "mv_mahasiswa_gender"
+            }
+          },
+          {
+            "name": "q",
+            "required": false,
+            "in": "query",
+            "description": "Search Keyword",
+            "schema": {
+              "type": "string",
+              "example": "Jawa Barat"
+            }
+          },
+          {
+            "name": "page",
+            "required": true,
+            "in": "query",
+            "description": "Halaman",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Jumlah data per halaman",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "oneOf": [
+                          {
+                            "description": "mv_mahasiswa_gender & mv_mahasiswa_slta_kategori",
+                            "properties": {
+                              "angkatan": {
+                                "type": "integer",
+                                "example": 2024
+                              },
+                              "jenis": {
+                                "type": "string"
+                              },
+                              "total": {
+                                "type": "integer"
+                              }
+                            }
+                          },
+                          {
+                            "description": "mv_mahasiswa_agama",
+                            "properties": {
+                              "angkatan": {
+                                "type": "integer",
+                                "example": 2024
+                              },
+                              "agama": {
+                                "type": "string"
+                              },
+                              "total": {
+                                "type": "integer"
+                              }
+                            }
+                          },
+                          {
+                            "description": "mv_mahasiswa_jalur_daftar",
+                            "properties": {
+                              "angkatan": {
+                                "type": "integer",
+                                "example": 2025
+                              },
+                              "tipe": {
+                                "type": "string"
+                              },
+                              "total": {
+                                "type": "integer"
+                              }
+                            }
+                          },
+                          {
+                            "description": "mv_mahasiswa_total",
+                            "properties": {
+                              "angkatan": {
+                                "type": "integer",
+                                "example": 2023
+                              },
+                              "total": {
+                                "type": "integer"
+                              }
+                            }
+                          },
+                          {
+                            "description": "mv_mahasiswa_domisili",
+                            "properties": {
+                              "namaProvinsi": {
+                                "type": "string"
+                              },
+                              "provinsiLat": {
+                                "type": "number",
+                                "example": -6.9175
+                              },
+                              "provinsiLng": {
+                                "type": "number",
+                                "example": 107.6191
+                              },
+                              "namaWilayah": {
+                                "type": "string"
+                              },
+                              "wilayahLat": {
+                                "type": "number",
+                                "example": -7.0208
+                              },
+                              "wilayahLng": {
+                                "type": "number",
+                                "example": 107.5192
+                              },
+                              "total": {
+                                "type": "integer"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "meta": {
+                      "properties": {
+                        "total": {
+                          "type": "integer"
+                        },
+                        "page": {
+                          "type": "integer"
+                        },
+                        "perPage": {
+                          "type": "integer"
+                        },
+                        "lastPage": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        }
+      }
+    },
     "/api/jobs/run": {
       "post": {
-        "tags": ["DataCore"],
+        "tags": [
+          "DataCore"
+        ],
         "summary": "Trigger sync & aggregation job",
         "description": "Melakukan manual trigger untuk proses sinkronisasi dan agregasi data. (Memerlukan autentikasi).",
         "security": [
@@ -1059,7 +1335,9 @@
     },
     "/api/jobs/schedules": {
       "get": {
-        "tags": ["DataCore"],
+        "tags": [
+          "DataCore"
+        ],
         "summary": "Get Scheduled Jobs",
         "security": [
           {
@@ -1122,7 +1400,9 @@
         }
       },
       "put": {
-        "tags": ["DataCore"],
+        "tags": [
+          "DataCore"
+        ],
         "summary": "Create/Update Scheduled Jobs",
         "security": [
           {
@@ -1172,7 +1452,9 @@
     },
     "/api/etl/debug/fullSync": {
       "get": {
-        "tags": ["DataCore Debug"],
+        "tags": [
+          "DataCore Debug"
+        ],
         "summary": "[DEBUG ONLY] Direct sync & aggr trigger without queue/job",
         "security": [
           {
@@ -1194,7 +1476,9 @@
     },
     "/api/etl/datahub/debug/mahasiswa": {
       "get": {
-        "tags": ["DataCore Debug"],
+        "tags": [
+          "DataCore Debug"
+        ],
         "summary": "[DEBUG ONLY] Debug DataHub API",
         "security": [
           {
@@ -1274,7 +1558,9 @@
             "type": "integer"
           }
         },
-        "required": ["message"]
+        "required": [
+          "message"
+        ]
       },
       "GeoPoint": {
         "type": "object",
