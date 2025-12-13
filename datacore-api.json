@@ -48,9 +48,7 @@
   "paths": {
     "/api/v1/guest/mahasiswa/gender": {
       "get": {
-        "tags": [
-          "DataView - Guest"
-        ],
+        "tags": ["DataView - Guest"],
         "summary": "Get Mahasiswa Gender (Guest)",
         "description": "Mengambil data agregat jumlah mahasiswa berdasarkan jenis kelamin untuk semua angkatan.",
         "responses": {
@@ -69,9 +67,7 @@
     },
     "/api/v1/guest/mahasiswa/jenis-slta": {
       "get": {
-        "tags": [
-          "DataView - Guest"
-        ],
+        "tags": ["DataView - Guest"],
         "summary": "Get Mahasiswa Jenis SLTA (Guest)",
         "description": "Mengambil data agregat jumlah mahasiswa berdasarkan jenis SLTA untuk semua angkatan.",
         "responses": {
@@ -90,9 +86,7 @@
     },
     "/api/v1/guest/mahasiswa/rasio-dosen-mhs": {
       "get": {
-        "tags": [
-          "DataView - Guest"
-        ],
+        "tags": ["DataView - Guest"],
         "summary": "Get Rasio Dosen dan Mahasiswa (Guest)",
         "description": "Mengambil data rasio total dosen terhadap total mahasiswa.",
         "responses": {
@@ -111,9 +105,7 @@
     },
     "/api/v1/guest/mahasiswa/domisili": {
       "get": {
-        "tags": [
-          "DataView - Guest"
-        ],
+        "tags": ["DataView - Guest"],
         "summary": "Get Persebaran Domisili Mahasiswa (Guest)",
         "description": "Mengambil data persebaran domisili mahasiswa. Jika parameter 'provinsi' diberikan, akan mengembalikan persebaran kota di provinsi tersebut. Jika tidak, akan mengembalikan persebaran provinsi.",
         "parameters": [
@@ -144,9 +136,7 @@
     },
     "/api/v1/guest/mahasiswa/agama": {
       "get": {
-        "tags": [
-          "DataView - Guest"
-        ],
+        "tags": ["DataView - Guest"],
         "summary": "Get Mahasiswa Agama (Guest)",
         "description": "Mengambil data agregat jumlah mahasiswa berdasarkan agama untuk semua angkatan.",
         "responses": {
@@ -165,9 +155,7 @@
     },
     "/api/v1/guest/akademik/tipe-tes-masuk": {
       "get": {
-        "tags": [
-          "DataView - Guest"
-        ],
+        "tags": ["DataView - Guest"],
         "summary": "Get Tipe Tes Masuk (Guest)",
         "description": "Mengambil data tipe tes masuk mahasiswa keseluruhan.",
         "responses": {
@@ -186,9 +174,7 @@
     },
     "/api/v1/akademik/distribusi-nilai": {
       "get": {
-        "tags": [
-          "DataView - Akademik"
-        ],
+        "tags": ["DataView - Akademik"],
         "summary": "Get Distribusi Nilai",
         "description": "Mengambil data distribusi indeks nilai per mata kuliah. (Memerlukan autentikasi).",
         "security": [
@@ -226,9 +212,7 @@
     },
     "/api/v1/akademik/tren-ip-rata-rata": {
       "get": {
-        "tags": [
-          "DataView - Akademik"
-        ],
+        "tags": ["DataView - Akademik"],
         "summary": "Get Tren IP Rata-Rata",
         "description": "Mengambil data tren IP rata-rata per semester untuk angkatan tertentu. (Memerlukan autentikasi).",
         "security": [
@@ -263,9 +247,7 @@
     },
     "/api/v1/akademik/tren-ip-tertinggi": {
       "get": {
-        "tags": [
-          "DataView - Akademik"
-        ],
+        "tags": ["DataView - Akademik"],
         "summary": "Get Tren IP Tertinggi",
         "description": "Mengambil data tren IP tertinggi. Jika parameter 'semester' diberikan, akan mengembalikan IP tertinggi per angkatan untuk semester tsb. Jika tidak, akan mengembalikan IP tertinggi per semester untuk angkatan default. (Memerlukan autentikasi).",
         "security": [
@@ -310,9 +292,7 @@
     },
     "/api/v1/akademik/tipe-tes-masuk": {
       "get": {
-        "tags": [
-          "DataView - Akademik"
-        ],
+        "tags": ["DataView - Akademik"],
         "summary": "Get Tipe Tes Masuk",
         "description": "Mengambil data tipe tes masuk mahasiswa. Dapat difilter berdasarkan 'kelas', 'prodi', atau default (angkatan). (Memerlukan autentikasi).",
         "security": [
@@ -363,9 +343,7 @@
     },
     "/api/v1/mahasiswa/jumlah-mahasiswa": {
       "get": {
-        "tags": [
-          "DataView - Kemahasiswaan"
-        ],
+        "tags": ["DataView - Kemahasiswaan"],
         "summary": "Get Jumlah Mahasiswa",
         "description": "Mengambil data jumlah mahasiswa. Jika parameter 'prodi' diberikan, akan mengembalikan jumlah per kelas dalam prodi tsb. Jika tidak, akan mengembalikan jumlah per prodi dalam angkatan default. (Memerlukan autentikasi).",
         "security": [
@@ -410,9 +388,7 @@
     },
     "/api/v1/mahasiswa/gender": {
       "get": {
-        "tags": [
-          "DataView - Kemahasiswaan"
-        ],
+        "tags": ["DataView - Kemahasiswaan"],
         "summary": "Get Mahasiswa Gender",
         "description": "Mengambil data agregat jenis kelamin mahasiswa. Dapat difilter berdasarkan 'kelas', 'prodi', atau default (angkatan). (Memerlukan autentikasi).",
         "security": [
@@ -463,9 +439,7 @@
     },
     "/api/v1/mahasiswa/jenis-slta": {
       "get": {
-        "tags": [
-          "DataView - Kemahasiswaan"
-        ],
+        "tags": ["DataView - Kemahasiswaan"],
         "summary": "Get Mahasiswa Jenis SLTA",
         "description": "Mengambil data agregat jenis SLTA mahasiswa. Dapat difilter berdasarkan 'kelas', 'prodi', atau default (angkatan). (Memerlukan autentikasi).",
         "security": [
@@ -516,9 +490,7 @@
     },
     "/api/v1/mahasiswa/agama": {
       "get": {
-        "tags": [
-          "DataView - Kemahasiswaan"
-        ],
+        "tags": ["DataView - Kemahasiswaan"],
         "summary": "Get Mahasiswa Agama",
         "description": "Mengambil data agregat agama mahasiswa. Dapat difilter berdasarkan 'kelas', 'prodi', atau default (angkatan). (Memerlukan autentikasi).",
         "security": [
@@ -569,9 +541,7 @@
     },
     "/api/auth/login": {
       "post": {
-        "tags": [
-          "DataCore"
-        ],
+        "tags": ["DataCore"],
         "summary": "Login untuk DataCore dan DataView",
         "description": "Using DataHub API",
         "requestBody": {
@@ -651,9 +621,7 @@
     },
     "/api/auth/logout": {
       "post": {
-        "tags": [
-          "DataCore"
-        ],
+        "tags": ["DataCore"],
         "summary": "Logout untuk DataCore dan DataView",
         "description": "Using DataHub API",
         "security": [
@@ -681,9 +649,7 @@
     },
     "/api/datacore/dashboard/stats": {
       "get": {
-        "tags": [
-          "DataCore"
-        ],
+        "tags": ["DataCore"],
         "summary": "Data statistik dashboard ringkas",
         "security": [
           {
@@ -740,8 +706,13 @@
                         "totalDosen": {
                           "type": "number"
                         },
-                        "totalDataAkademik": {
-                          "type": "number"
+                        "totalDataAkademikNilai": {
+                          "type": "number",
+                          "example": 2975
+                        },
+                        "totalDataAkademikIp": {
+                          "type": "number",
+                          "example": 423
                         }
                       }
                     }
@@ -761,9 +732,7 @@
     },
     "/api/datacore/jobs/history": {
       "get": {
-        "tags": [
-          "DataCore"
-        ],
+        "tags": ["DataCore"],
         "summary": "Get all ETL job history",
         "security": [
           {
@@ -862,9 +831,7 @@
     },
     "/api/datacore/jobs/history/{id}": {
       "get": {
-        "tags": [
-          "DataCore"
-        ],
+        "tags": ["DataCore"],
         "summary": "Get single ETL job history",
         "security": [
           {
@@ -934,9 +901,7 @@
     },
     "/api/datacore/cache/keys": {
       "get": {
-        "tags": [
-          "DataCore"
-        ],
+        "tags": ["DataCore"],
         "deprecated": true,
         "summary": "[JSON Viewer] Get All Cache keys",
         "security": [
@@ -986,9 +951,7 @@
     },
     "/api/datacore/cache/{key}": {
       "get": {
-        "tags": [
-          "DataCore"
-        ],
+        "tags": ["DataCore"],
         "deprecated": true,
         "summary": "[JSON Viewer] Get JSON Cache Detail",
         "security": [
@@ -1034,9 +997,7 @@
     },
     "/api/datacore/inspector/mv": {
       "get": {
-        "tags": [
-          "DataCore"
-        ],
+        "tags": ["DataCore"],
         "summary": "[MV Inspector] Get List of Materialized View names",
         "security": [
           {
@@ -1080,9 +1041,7 @@
     },
     "/api/datacore/inspector/mv/{mvName}": {
       "get": {
-        "tags": [
-          "DataCore"
-        ],
+        "tags": ["DataCore"],
         "summary": "[MV Inspector] Get Detailed Materialized View Data",
         "security": [
           {
@@ -1264,9 +1223,7 @@
     },
     "/api/jobs/run": {
       "post": {
-        "tags": [
-          "DataCore"
-        ],
+        "tags": ["DataCore"],
         "summary": "Trigger sync & aggregation job",
         "description": "Melakukan manual trigger untuk proses sinkronisasi dan agregasi data. (Memerlukan autentikasi).",
         "security": [
@@ -1321,9 +1278,7 @@
     },
     "/api/jobs/schedules": {
       "get": {
-        "tags": [
-          "DataCore"
-        ],
+        "tags": ["DataCore"],
         "summary": "Get Scheduled Jobs",
         "security": [
           {
@@ -1386,9 +1341,7 @@
         }
       },
       "put": {
-        "tags": [
-          "DataCore"
-        ],
+        "tags": ["DataCore"],
         "summary": "Create/Update Scheduled Jobs",
         "security": [
           {
@@ -1438,9 +1391,7 @@
     },
     "/api/etl/debug/fullSync": {
       "get": {
-        "tags": [
-          "DataCore Debug"
-        ],
+        "tags": ["DataCore Debug"],
         "summary": "[DEBUG ONLY] Direct sync & aggr trigger without queue/job",
         "security": [
           {
@@ -1462,9 +1413,7 @@
     },
     "/api/etl/datahub/debug/mahasiswa": {
       "get": {
-        "tags": [
-          "DataCore Debug"
-        ],
+        "tags": ["DataCore Debug"],
         "summary": "[DEBUG ONLY] Debug DataHub API",
         "security": [
           {
@@ -1544,9 +1493,7 @@
             "type": "integer"
           }
         },
-        "required": [
-          "message"
-        ]
+        "required": ["message"]
       },
       "GeoPoint": {
         "type": "object",
