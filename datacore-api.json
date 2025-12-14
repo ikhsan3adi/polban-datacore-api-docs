@@ -1224,6 +1224,42 @@
         }
       }
     },
+    "/api/jobs": {
+      "get": {
+        "tags": ["DataCore"],
+        "summary": "Get List of Available Jobs",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Available Jobs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          }
+        }
+      }
+    },
     "/api/jobs/run": {
       "post": {
         "tags": ["DataCore"],
