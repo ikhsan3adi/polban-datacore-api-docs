@@ -2,7 +2,8 @@
   "openapi": "3.0.2",
   "info": {
     "title": "Polban DataVerse - DataCore API",
-    "version": "1.1.1",
+    "version": "1.1.5",
+    "description": "Dokumentasi API untuk Polban DataCore",
     "contact": {
       "name": "Ikhsan Satriadi",
       "email": "ikhsan.satriadi.tif24@polban.ac.id",
@@ -545,9 +546,11 @@
         "summary": "Login untuk DataCore dan DataView",
         "description": "Using DataHub API",
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
+                "required": ["email", "password"],
                 "properties": {
                   "email": {
                     "type": "string"
@@ -1232,9 +1235,11 @@
           }
         ],
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
+                "required": ["jobName"],
                 "properties": {
                   "jobName": {
                     "type": "string",
@@ -1349,13 +1354,18 @@
           }
         ],
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
+                "required": ["jobName"],
                 "properties": {
                   "jobName": {
                     "type": "string",
                     "example": "full-sync-and-aggregate"
+                  },
+                  "isActive": {
+                    "type": "boolean"
                   },
                   "cronExpression": {
                     "type": "string",
@@ -1385,6 +1395,56 @@
           },
           "403": {
             "$ref": "#/components/responses/Forbidden"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["DataCore"],
+        "summary": "Delete Scheduled Jobs",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": ["jobName"],
+                "properties": {
+                  "jobName": {
+                    "type": "string",
+                    "example": "full-sync-and-aggregate"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "5XX": {
+            "$ref": "#/components/responses/InternalServerError"
           }
         }
       }
