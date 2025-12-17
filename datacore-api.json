@@ -100,6 +100,9 @@
                 }
               }
             }
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
           }
         }
       }
@@ -618,6 +621,9 @@
                 }
               }
             }
+          },
+          "5XX": {
+            "$ref": "#/components/responses/InternalServerError"
           }
         }
       }
@@ -1215,6 +1221,9 @@
               }
             }
           },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
           },
@@ -1308,11 +1317,17 @@
               }
             }
           },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
           },
           "403": {
             "$ref": "#/components/responses/Forbidden"
+          },
+          "5XX": {
+            "$ref": "#/components/responses/InternalServerError"
           }
         }
       }
@@ -1416,7 +1431,7 @@
           }
         },
         "responses": {
-          "2XX": {
+          "200": {
             "description": "Created/Updated",
             "content": {
               "application/json": {
@@ -1431,6 +1446,9 @@
           },
           "403": {
             "$ref": "#/components/responses/Forbidden"
+          },
+          "5XX": {
+            "$ref": "#/components/responses/InternalServerError"
           }
         }
       },
@@ -2282,6 +2300,19 @@
             },
             "example": {
               "message": "Kesalahan server"
+            }
+          }
+        }
+      },
+      "NotImplemented": {
+        "description": "Fitur belum diimplementasikan",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "example": {
+              "message": "Fitur belum diimplementasikan"
             }
           }
         }
