@@ -4,6 +4,9 @@ on:
 
 jobs:
   updateSwagger:
+    permissions:
+      contents: write
+      pull-requests: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -18,7 +21,7 @@ jobs:
         if: steps.swagger-ui.outputs.current_tag != steps.swagger-ui.outputs.release_tag
         env:
           RELEASE_TAG: ${{ steps.swagger-ui.outputs.release_tag }}
-          SWAGGER_YAML: "swagger.yaml"
+          SWAGGER_YAML: "datacore-api.json"
         run: |
           # Delete the dist directory and index.html
           rm -fr dist index.html
